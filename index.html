@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/all.js"></script>
+    <title>NOTI IAAS - HGZMF 02</title> 
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    
+    <h2><center>NOTI IAAS</h2></center>
+    <!---<h5 align="center" ><script type="text/javascript">var timestamp = new Date();document.write(timestamp.toLocaleString("es-mx"));</script></h5>--->
+    <div class="send" id="loader" hidden>
+        <i class="fa-solid fa-spinner fa-spin-pulse fa-2xl"></i>
+    </div>
+    <div class="form-all">
+        <form id="dataForm" onsubmit="event.preventDefault(); submitForm();">
+            <div class="form-row2">
+                <label>Fecha y hora de notificación:</label>                
+                <div class="date"><script type="text/javascript">var timestamp = new Date();document.write(timestamp.toLocaleString("es-mx"));</script></div>
+            </div>
+            <fieldset>
+                <legend>Datos del paciente</legend>
+                <div class="form-row2">
+                    <input id="nombreP" type="text" name="nombre" placeholder="Nombre(s)" required>
+                    <input id="apellidoP" type="text" name="apellido" placeholder="Apellidos" required>
+                </div>
+
+                <div class="form-row2">
+                    <input id="nss" type="number" name="nss" placeholder="NSS" required>
+                    <input id="am" type="text" name="am" placeholder="Agregado Médico" required>
+                </div>
+            </fieldset>
+
+            <div class="form-row2">
+                <label>Servicio:</label>
+                <select id="servicio"  required>
+                    <option style="display:none"></option>
+                    <option value="Alojamiento Conjunto">Alojamiento Conjunto</option>
+                    <option value="Angiología">Angiología</option>
+                    <option value="Cardiología">Cardiología</option>
+                    <option value="Cirugía General">Cirugía General</option>
+                    <option value="Cirugía Maxilofacial">Cirugía Maxilofacial</option>
+                    <option value="Cirugía Pediátrica">Cirugía Pediátrica</option>
+                    <option value="Cirugía Plástica Reconstructiva">Cirugía Plástica Reconstructiva</option>
+                    <option value="Cunero Patológico">Cunero Patológico</option>
+                    <option value="Epidemiología">Epidemiología</option>
+                    <option value="Gastroenterología">Gastroenterología</option>
+                    <option value="Ginecología">Ginecología</option>
+                    <option value="Ginecología Y Obstetricia">Ginecología Y Obstetricia</option>
+                    <option value="Hematología">Hematología</option>
+                    <option value="Infectología">Infectología</option>
+                    <option value="Med. Enfermo Edo. Critico">Med. Enfermo Edo. Critico</option>
+                    <option value="Medicina Interna">Medicina Interna</option>
+                    <option value="Nefrología">Nefrología</option>
+                    <option value="Neonatología Pediátrica">Neonatología Pediátrica</option>
+                    <option value="Neumología">Neumología</option>
+                    <option value="Neurocirugía">Neurocirugía</option>
+                    <option value="Neurología">Neurología</option>
+                    <option value="Oncología Medica">Oncología Medica</option>
+                    <option value="Oncología Pediátrica">Oncología Pediátrica</option>
+                    <option value="Oncología Quirúrgica">Oncología Quirúrgica</option>
+                    <option value="Ortopedia Y Traumatología">Ortopedia Y Traumatología</option>
+                    <option value="Pediatra Medica">Pediatra Medica</option>
+                    <option value="Traumatología">Traumatología</option>
+                    <option value="UCI Adultos">UCI Adultos</option>
+                    <option value="UCI Neonatales">UCI Neonatales</option>
+                    <option value="Urgencias">Urgencias</option>
+                    <option value="Urología">Urología</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="form-otros">                
+                <label id="serviciotag" for="otroServicio"  hidden>Especifique:</label>
+                <input id="serviciotxt" type="text" name="otroServicio" placeholder="Escriba otro servicio" hidden>
+            </div>
+
+            <div class="form-row">
+                <label>Cama:</label>
+                <input id="cama" type="number" name="cama" placeholder="#" required>
+                <label>Pb. IAAS:</label>
+                <select id="pb"  required>
+                    <option style="display:none"></option>
+                    <option value="Infección de Sitio Quirúrgico">Infección de Sitio Quirúrgico</option>
+                    <option value="Neumonías Asociadas a la Atención de la Salud">Neumonías Asociadas a la Atención de la Salud</option>
+                    <option value="Infección del Torrente Sanguíneo">Infección del Torrente Sanguíneo Asociada a la Atención de la Salud</option>
+                    <option value="Infección de Vías Urinarias Asociada a Catéter Urinario">Infección de Vías Urinarias Asociada a Catéter Urinario</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="form-otros">                
+                <label id="pbtag" for="otroPb"  hidden>Especifique:</label>
+                <input id="pbtxt" type="text" name="otroPb" placeholder="Escriba otra IAAS" hidden>
+            </div>
+
+
+<!---           OPCION 1             --->
+            <div class="form-row2">
+                <label id="pblabel" hidden>Tipo:</label>
+                <select id="pboption"  hidden>
+                    <option style="display:none"></option>
+                </select>
+            </div>
+
+            <div class="form-row3">
+                <fieldset>
+                    <legend>Datos de quien notifica</legend>
+                        <div class="form-row2">
+                            <input id="nombre" type="text" name="nombre2" placeholder="Nombre(s) y Apellidos" required>                     
+                            <input id="matricula"  type="number" name="matricula" placeholder="Matrícula" required>
+                        </div>
+                        <div class="form-labels">
+                            <label >Categoría:</label>
+                            <label id="espL" hidden>Especialidad:</label>
+                        </div>
+                        <div class="nospace">
+                            <select id="categoria"  required>
+                                <option style="display:none"></option>
+                                <option value="Enfermera">Enfermera</option>
+                                <option value="Médico">Médico</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <select id="especialidad" hidden>
+                                <option style="display:none"></option>
+                                <option value="Angiólog(a)o">Angiólogo(a)</option>
+                                <option value="Cardiólogo(a)">Cardiólogo(a)</option>
+                                <option value="Cirujano(a) General">Cirujano(a) General</option>
+                                <option value="Cirujano(a) Maxilofacial">Cirujano(a) Maxilofacial</option>
+                                <option value="Neurocirujano(a)">Neurocirujano(a)</option>
+                                <option value="Cirujano(a) Oncólogo">Cirujano(a) Oncólogo</option>
+                                <option value="Cirujano(a) Pediatra">Cirujano(a) Pediatra</option>                                
+                                <option value="Epidemiólogo(a)">Epidemiólogo(a)</option>
+                                <option value="Gastroenterólogo">Gastroenterólogo</option>
+                                <option value="Ginecólogo-Obstetra">Ginecólogo-Obstetra</option>
+                                <option value="Hematólogo(a)">Hematólogo(a)</option>
+                                <option value="Infectólogo(a)">Infectólogo(a)</option>
+                                <option value="Médico internista">Médico internista</option>
+                                <option value="Nefrólogo(a)">Nefrólogo(a)</option>
+                                <option value="Neumólogo(a)">Neumólogo(a)</option>
+                                <option value="Neurólogo(a)">Neurólogo(a)</option>
+                                <option value="Oncólogo(a) Médico(a)">Oncólogo(a) Médico(a)</option>
+                                <option value="Oncólogo(a) Pediátra">Oncólogo(a) Pediatra</option>
+                                <option value="Oncólogo(a) Quirúrgico(a)">Oncólogo(a) Quirúrgico(a)</option>
+                                <option value="Ortopedista y Traumatólogo(a)">Ortopedista y Traumatólogo(a)</option>
+                                <option value="Pediatra Medico">Pediatra Medico</option>
+                                <option value="Traumatólogo(a)">Traumatólogo(a)</option>
+                                <option value="Urológo(a)">Urológo(a)</option>
+                            </select>
+                        </div>                        
+                </fieldset>
+            </div>
+
+            <div class="form-row2">
+                <button id="reset" type="reset" class="boton">Limpiar</button>
+                <button id="submit" type="submit" class="boton">Enviar</button>
+            </div>
+        </form>
+        
+    </div>
+    <footer>
+        <div class="send">
+            <i class="fa-solid fa-eye"></i><a href="visualize.html" style="color: white;"> Ver registros</a>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
