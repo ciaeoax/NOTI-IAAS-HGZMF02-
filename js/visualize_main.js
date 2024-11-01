@@ -124,6 +124,7 @@ async function getData(dates) {
                 elemento.innerHTML += ("<td>" + result.data[i]['fecha'] + "</td>");
                 elemento.innerHTML += ("<td>" + result.data[i]['nombre'] + "</td>");
                 elemento.innerHTML += ("<td>" + result.data[i]['cargo'] + "</td>");
+                //elemento.innerHTML += ("<td>" + result.data[i]['matricula'] + "</td>");
                 tabla.appendChild(elemento);
             }
             loader.hidden = true;
