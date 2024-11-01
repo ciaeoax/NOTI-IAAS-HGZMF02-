@@ -97,7 +97,7 @@ async function getData(dates) {
         fechas: dates
     }
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycby6igLP1lR2kBrwRYQ-ARMQX0z3O-s214ubYpjivZBuTsc-kKR3BNn8zpO5aQ5SUCol/exec', { // Replace with your Google Apps Script URL
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzp51hAxPjJY6s7oJtZxD_wTNFUa3rwFchUfqdM-9lSRtXCRUjHcbCsBYdkglFeNw6f/exec', { // Replace with your Google Apps Script URL
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8'
