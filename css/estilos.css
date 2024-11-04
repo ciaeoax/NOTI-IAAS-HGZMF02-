@@ -225,6 +225,9 @@ a{
     margin-top: -10px;
     margin-left: -5%;
 }
+.topper h2{
+            margin-bottom: 0;
+        }
 .date {
     margin-right: 0;
 }
