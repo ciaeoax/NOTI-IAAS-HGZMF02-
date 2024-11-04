@@ -12,14 +12,6 @@ document.getElementById('am').addEventListener('change', function(event){
         alert('Verifique el agregado médico. (8 caracteres)\nEjemplo: 1F2000OR')
     }
 });
-/*document.getElementById('unidad').addEventListener('change', function(event){
-    if (document.getElementById('unidad').value != ''){
-        document.getElementById('unidad').style.backgroundColor = "#b48e5d";
-        document.getElementById('unidad').style.color = "white";
-        document.getElementById('unidad').style.fontSize = "medium";
-    }
-});*/
-
 document.getElementById('categoria').addEventListener('change', function(event){
     var value = document.getElementById('categoria').value;
     if (value == 'Médico'){
@@ -109,41 +101,37 @@ async function submitForm() {
     } else if (loc == 'Consulta Externa'){
         localizacionvalue = 'Consulta Externa';
     }
-    
-    /*if (!(document.getElementById('nombreP').value).includes(" ")) {
-        alert('Ingrese un Nombre Completo.');
-        document.getElementById('submit').disabled = false;
-        return;
-    }*/
-
     if (document.getElementById('nss').value.length != 10){
         alert('Ingrese un NSS correcto: 10 dígitos.');
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
     }
-
     if (document.getElementById('am').value.length != 8) {
         alert('Verifique el agregado médico. (8 caracteres)\nEjemplo: 1F2000OR')
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
     }
-
+    const re = /[1-7](F|M)(1|2)[0-9]{3}(OR|ES|SF|SA|PE|ND)/;
+    if (re.test(document.getElementById('am').value.toUpperCase()) == false){
+        alert('Verifique el agregado médico. (8 caracteres)\nEjemplo: 1F2000OR');
+        document.getElementById('submit').disabled = false;
+        loader.hidden = true;
+        return;
+    }
     if (!(document.getElementById('nombre').value).includes(" ")) {
         alert('Ingrese el Nombre Completo de quien notifica.');
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
     }
-
     if (document.getElementById('matricula').value.length != 8){
         alert('Ingrese una matricula correcta: 8 dígitos.');
         document.getElementById('submit').disabled = false;
         loader.hidden = true;
         return;
     }
-
     if (document.getElementById('servicio').value=="Otro"){
         serviciovalue = document.getElementById('serviciotxt').value;
         if (serviciovalue == ''){
@@ -186,7 +174,7 @@ async function submitForm() {
         nss: document.getElementById('nss').value.toString().padStart(10,'0'),
         am: document.getElementById('am').value.toUpperCase(),
         servicio: serviciovalue.toUpperCase(),
-        cama: localizacionvalue.toUpperCase(),//document.getElementById('cama').value,
+        cama: localizacionvalue.toUpperCase(),
         pb: pbvalue.toUpperCase(),
         tipo: tipovalue.toUpperCase(),
         nombre: document.getElementById('nombre').value.toUpperCase(),
@@ -210,7 +198,7 @@ async function submitForm() {
 
         if (result.status === 'success') {
             loader.hidden = true;
-            console.log('Data saved and received:', formData); //result.data[0]["oportunidad"]
+            console.log('Data saved and received:', formData); 
             not = new Date();
             alert('Información registrada correctamente.\nFecha notificación: ' + not.toLocaleString('es-mx'));
             generatePDF(formData);
@@ -357,14 +345,9 @@ async function generatePDF(data) {
     doc.text(line611, x[8]+marginleft+space, heighs[5]);
     doc.text(line711, x[9]+marginleft+space, heighs[6]);
     doc.text(line721, x[10]+space, heighs[6], {maxWidth:30});
-
-    //console.log(line231, 'longitud', doc.getTextWidth(line231).toString());
-    //console.log(line111, 'comienza en: ', getX(doc,line11)+marginleft+space);
-    //console.log('inicio de ',line11, getX(doc, line11, marginleft+space));
     
     // Save the PDF
     pdfname = not.getFullYear().toString() + (not.getMonth()+1).toString().padStart(2,'0') + not.getDate().toString().padStart(2,'0') + '_NSS' + data.nss + '.pdf';
-    //console.log(pdfname, not);
     doc.save(pdfname);
 }
 
