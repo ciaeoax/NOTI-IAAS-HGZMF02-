@@ -1,3 +1,21 @@
+// DOWNLOAD EXCEL
+function exportarExcel() {
+    tabla = document.getElementById("tabla");
+    wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.table_to_sheet(tabla);
+    XLSX.utils.book_append_sheet(wb, ws, "Hoja1");
+    // -- 
+    let fecha = new Date();
+    let anio = fecha.getFullYear(); // Obtiene el año (aaaa)
+    let mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes (mm), sumamos 1 porque los meses van de 0 a 11
+    let dia = String(fecha.getDate()).padStart(2, '0'); // Día (dd)
+    let fechaFormateada = `${anio}${mes}${dia}`;
+    mes_selected = document.getElementById('periodoOpt');
+    messs = mes_selected.options[mes_selected.selectedIndex].text.toLowerCase()
+    titulo = "HGZMF02_IAAS_"+messs+"_"+fechaFormateada+".xlsx";
+    // -- 
+    XLSX.writeFile(wb, titulo);
+}
 // WHEN LOADING THE FORM ITS DISPLAY THE CURRENTLY MONTHS
 document.addEventListener("DOMContentLoaded", function() {
     var meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
@@ -89,7 +107,9 @@ function getArrayDates(day1, day2){
 async function getData(dates) {
     var loader = document.getElementById('loader');
     var tabla = document.getElementById('tabla');
+    var download = document.getElementById('download');
     loader.hidden = false;
+    download.hidden = true;
     // RESETING TABLE
     tabla.innerHTML = ('<tr><th style="width: 3.33%;">N</th><th style="width: 13.33%;">Nombre del paciente</th><th style="width: 6.66%;">NSS</th><th style="width: 10.0%;">Servicio</th><th style="width: 6.66%;">Cama</th><th style="width: 10.0%;">Pb. IAAS</th><th style="width: 12.0%;">Tipo</th><th style="width: 12.0%;">Fecha</th><th style="width: 13.33%;">Nombre</th><th style="width: 10.0%;">Cargo</th></tr>');//<th style="width: 6.66%;">Matrícula</th></tr>');
     console.log(dates);
@@ -128,6 +148,7 @@ async function getData(dates) {
                 tabla.appendChild(elemento);
             }
             loader.hidden = true;
+            download.hidden = false;
         } else {
             console.error('Error:', result.message);
             document.getElementById('result').textContent = `Error: ${result.message}`;
