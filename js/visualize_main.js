@@ -49,9 +49,11 @@ document.getElementById('switch').addEventListener('change', function(event){
 // WHEN VALUE CHANGES FROM PERIODO -> MES IS SELECTED
 document.getElementById('periodoOpt').addEventListener('change', function(event){
     var mes = document.getElementById('periodoOpt').value;
-    var año = 2025; // CURRENT YEAR (FOR FUTURE WORK: MAKING USER TO ENTER YEAR)
+    let fecha = new Date();
+    let anio = fecha.getFullYear(); // Obtiene el año (aaaa)
+    var año = anio; // CURRENT YEAR (FOR FUTURE WORK: MAKING USER TO ENTER YEAR)
     var date2 = new Date(año,mes,25); // 25 mes 2024
-    if (mes==0){mes=11;año=2024;} else{mes=mes-1;}  // WHEN THE MONTH IS JANUARY -> 0 TO START IN DECEMBER AND PAST YEAR (FOR FUTURE WORK: RESTING 1 TO THE YEAR ENTERED BY USER)
+    if (mes==0){mes=11;año=anio-1;} else{mes=mes-1;}  // WHEN THE MONTH IS JANUARY -> 0 TO START IN DECEMBER AND PAST YEAR (FOR FUTURE WORK: RESTING 1 TO THE YEAR ENTERED BY USER)
     var date1 = new Date(año,mes,26); // 26 mes 202te
     var day1 = date1.toISOString().substring(0,10); //2023-12-26 <- FORMAT NEEDED
     var day2 = date2.toISOString().substring(0,10); //2024-01-25 <- FORMAT NEEDED
