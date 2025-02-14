@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/all.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <title>NOTI IAAS - HGZMF 02</title> 
     <link rel="stylesheet" href="css/estilos2.css"> 
 </head>
@@ -58,6 +60,9 @@
                     <!---<th style="width: 6.66%;">Matrícula</th>--->
                 </tr>
             </table>
+            <div id="download" hidden>
+                <button onclick="exportarExcel()" style="font-size: 20px; background-color: white;"><i class="fa-regular fa-file-excel" style="color: #008000;"></i></button>
+            </div>
         </form>
 
         <div id="result"></div>
